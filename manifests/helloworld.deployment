@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld
+  namespace: staging
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - args:
+        - /opt/helloworld/bin/flask
+        - run
+        env:
+        - name: FLASK_APP
+          value: "helloworld.py"
+        image: shtouff/helloworld:latest
+        imagePullPolicy: IfNotPresent
+        name: helloworld
+        ports:
+        - containerPort: 5000
+          name: flask-tcp-local
+          protocol: TCP
+        resources:
+          limits:
+            memory: 170Mi
+          requests:
+            cpu: 100m
+            memory: 70Mi
