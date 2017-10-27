@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    custom/hello-world: toto
+  labels:
+    arbitrary-label: arbitrary-value
+  name: helloworld-deployment
+  namespace: staging
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+      creationTimestamp: null
+      labels:
+        k8s-app: kube-dns
+    spec:
+      containers:
+      - command:
+        - /opt/helloworld/bin/flask
+        args:
+        - run
+        env:
+        - name: FLASK_APP
+          value: "helloworld"
+        image: shtouff/helloworld
+        imagePullPolicy: IfNotPresent
+        name: helloworld
+        resources:
+          limits:
+            memory: 170Mi
+          requests:
+            cpu: 100m
+            memory: 70Mi
