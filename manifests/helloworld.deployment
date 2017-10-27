@@ -14,12 +14,14 @@ spec:
         app: helloworld
     spec:
       containers:
-      - args:
+      - command:
         - /opt/helloworld/bin/flask
         - run
         env:
         - name: FLASK_APP
           value: "helloworld.py"
+        - name: FLASK_DEBUG
+          value: "1"
         image: shtouff/helloworld:latest
         imagePullPolicy: IfNotPresent
         name: helloworld
