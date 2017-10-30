@@ -17,13 +17,15 @@ spec:
       - command:
         - /opt/helloworld/bin/flask
         - run
+        - -h
+        - 0.0.0.0
         env:
         - name: FLASK_APP
           value: "helloworld.py"
         - name: FLASK_DEBUG
           value: "1"
         image: shtouff/helloworld:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: helloworld
         ports:
         - containerPort: 5000

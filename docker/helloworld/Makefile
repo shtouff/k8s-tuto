@@ -1,7 +1,7 @@
 DOCKER=docker
 NAME=helloworld
 REPO=shtouff
-TAGS=latest v0.0.1
+TAGS=latest v0.0.2
 
 help:
 	@echo Available targets are:
