@@ -1,6 +1,6 @@
-import os
+import socket
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 
 app = Flask('helloworld')
 
@@ -9,5 +9,5 @@ app = Flask('helloworld')
 def slash():
     return jsonify(
         message='hello world',
-        server=os.environ.get('HOSTNAME'),
+        server=socket.gethostname(),
     )

@@ -1,44 +1,38 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: helloworld
+  name: proxyworld
   namespace: staging
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: helloworld
+      app: proxyworld
   template:
     metadata:
       labels:
-        app: helloworld
+        app: proxyworld
     spec:
       containers:
       - command:
-        - /opt/helloworld/bin/flask
+        - /opt/proxyworld/bin/flask
         - run
         - -h
         - 0.0.0.0
+        - -p
+        - "4000"
         env:
         - name: FLASK_APP
-          value: "helloworld.py"
+          value: "proxyworld.py"
         - name: FLASK_DEBUG
           value: "1"
-        image: shtouff/helloworld:v0.0.2
+        image: shtouff/proxyworld:v0.0.3
         imagePullPolicy: Always
-        name: helloworld
+        name: proxyworld
         ports:
-        - containerPort: 5000
+        - containerPort: 4000
           name: flask-tcp-local
           protocol: TCP
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 5000
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 5000
         resources:
           limits:
             memory: 170Mi
