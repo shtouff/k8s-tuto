@@ -31,6 +31,9 @@ spec:
         - containerPort: 5000
           name: flask-tcp-local
           protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /kinexistepas
         resources:
           limits:
             memory: 170Mi

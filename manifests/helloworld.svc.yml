@@ -6,10 +6,12 @@ metadata:
   name: helloworld
   namespace: staging
 spec:
+  type: NodePort
   ports:
   - name: flask
     port: 80
     protocol: TCP
     targetPort: 5000
+    nodePort: 30500
   selector:
     app: helloworld
