@@ -33,7 +33,12 @@ spec:
           protocol: TCP
         livenessProbe:
           httpGet:
-            path: /kinexistepas
+            path: /
+            port: 5000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
         resources:
           limits:
             memory: 170Mi
